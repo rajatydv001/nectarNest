@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@theme {
+  --color-honey-50: #FFF8E7;
+  --color-honey-100: #FFEDC2;
+  --color-honey-200: #FFE099;
+  --color-honey-300: #FFD470;
+  --color-honey-400: #FFC747;
+  --color-honey-500: #D4A029;
+  --color-honey-600: #B8860B;
+  --color-honey-700: #8B6914;
+  --color-honey-800: #5E4B1F;
+  --color-honey-900: #3D3214;
+  --color-amber-600: #D97706;
+  --color-amber-700: #B45309;
+  --color-cream: #FDF6E3;
+  --color-earth: #4A3728;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: var(--color-cream);
+  color: #4A3728;
+}
+
+.font-display {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.honey-gradient {
+  background: linear-gradient(135deg, #D4A029 0%, #F5D061 50%, #D4A029 100%);
+}
+
+.honey-shadow {
+  box-shadow: 0 10px 40px rgba(212, 160, 41, 0.3);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes drip {
+  0% { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(1.5) translateY(20px); opacity: 0; }
+}
+
+.animate-drip {
+  animation: drip 2s ease-in-out infinite;
+}
