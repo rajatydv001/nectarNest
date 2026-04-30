@@ -5,6 +5,12 @@ const CartContext = createContext();
 const initialState = {
   items: [],
   total: 0,
+  coupon: null,
+  discount: 0,
+};
+
+const COUPONS = {
+  'NEW50': { discount: 20, description: '20% off for new customers', minOrder: 299 }
 };
 
 function cartReducer(state, action) {
@@ -17,20 +23,23 @@ function cartReducer(state, action) {
       if (existingIndex >= 0) {
         const newItems = [...state.items];
         newItems[existingIndex].quantity += action.payload.quantity;
-        return { ...state, items: newItems, total: calculateTotal(newItems) };
+        const newTotal = calculateTotal(newItems);
+        const newDiscount = calculateDiscount(newTotal, state.coupon);
+        return { ...state, items: newItems, total: newTotal, discount: newDiscount };
       }
       
-      return { 
-        ...state, 
-        items: [...state.items, action.payload],
-        total: calculateTotal([...state.items, action.payload])
-      };
+      const newItems = [...state.items, action.payload];
+      const newTotal = calculateTotal(newItems);
+      const newDiscount = calculateDiscount(newTotal, state.coupon);
+      return { ...state, items: newItems, total: newTotal, discount: newDiscount };
     }
     case 'REMOVE_ITEM': {
       const newItems = state.items.filter(
         (item) => !(item.id === action.payload.id && item.size === action.payload.size)
       );
-      return { ...state, items: newItems, total: calculateTotal(newItems) };
+      const newTotal = calculateTotal(newItems);
+      const newDiscount = calculateDiscount(newTotal, state.coupon);
+      return { ...state, items: newItems, total: newTotal, discount: newDiscount };
     }
     case 'UPDATE_QUANTITY': {
       const newItems = state.items.map((item) =>
@@ -38,7 +47,21 @@ function cartReducer(state, action) {
           ? { ...item, quantity: action.payload.quantity }
           : item
       );
-      return { ...state, items: newItems, total: calculateTotal(newItems) };
+      const newTotal = calculateTotal(newItems);
+      const newDiscount = calculateDiscount(newTotal, state.coupon);
+      return { ...state, items: newItems, total: newTotal, discount: newDiscount };
+    }
+    case 'APPLY_COUPON': {
+      const couponCode = action.payload.toUpperCase().trim();
+      const coupon = COUPONS[couponCode];
+      if (coupon && state.total >= coupon.minOrder) {
+        const newDiscount = calculateDiscount(state.total, coupon);
+        return { ...state, coupon: coupon, discount: newDiscount };
+      }
+      return state;
+    }
+    case 'REMOVE_COUPON': {
+      return { ...state, coupon: null, discount: 0 };
     }
     case 'CLEAR_CART':
       return initialState;
@@ -49,6 +72,11 @@ function cartReducer(state, action) {
 
 function calculateTotal(items) {
   return items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+}
+
+function calculateDiscount(total, coupon) {
+  if (!coupon) return 0;
+  return Math.round(total * (coupon.discount / 100));
 }
 
 export function CartProvider({ children }) {

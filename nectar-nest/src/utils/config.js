@@ -1,7 +1,7 @@
 export const config = {
   // Google Sheets (SheetDB)
   // Get your API key from https://sheetdb.io/
-  SHEET_DB_URL: 'https://sheetdb.io/api/v1/YOUR_SHEET_DB_API_KEY',
+  SHEET_DB_URL: 'https://sheetdb.io/api/v1/0psnnuem25zf5',
 
   // EmailJS Configuration
   // Get your keys from https://www.emailjs.com/
@@ -13,5 +13,5 @@ export const config = {
   OWNER_EMAIL: 'your-email@example.com',
 
   // Admin password
-  ADMIN_PASSWORD: 'nectar123'
+  ADMIN_PASSWORD: 'admin'
 };
