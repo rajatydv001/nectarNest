@@ -98,9 +98,6 @@ export default function ProductDetail() {
               src={product.id === 'ginger-lollipop' ? '/photo2.png' : (product.image || '/photo1.jpg')}
               alt={product.name}
               className="relative rounded-[30%] shadow-2xl w-full"
-              onError={(e) => {
-                e.target.src = '/photo1.jpg';
-              }}
             />
           </div>
 

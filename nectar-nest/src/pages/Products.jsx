@@ -71,9 +71,6 @@ export default function Products() {
                   src={product.id === 'ginger-lollipop' ? '/photo2.png' : (product.image || '/photo1.jpg')}
                   alt={product.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  onError={(e) => {
-                    e.target.src = '/photo1.jpg';
-                  }}
                 />
               </div>
 
