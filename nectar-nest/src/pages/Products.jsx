@@ -68,7 +68,7 @@ export default function Products() {
             >
               <div className="relative h-32 sm:h-48 bg-gray-100 overflow-hidden">
                 <img
-                  src={product.image || '/photo1.jpg'}
+                  src={product.id === 'ginger-lollipop' ? '/photo2.png' : (product.image || '/photo1.jpg')}
                   alt={product.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   onError={(e) => {
