@@ -20,7 +20,7 @@ export default function ProductCard({ product, onProductClick }) {
         size: isLollipop ? '1 unit' : '500g',
         price: isLollipop ? price500g : price500g,
         quantity: 1,
-        image: isLollipop ? '/photo2.png' : (product.image || '/photo1.jpg')
+        image: isLollipop ? 'photo2.png' : (product.image || 'photo1.jpg')
       }
     });
     setTimeout(() => setIsAdding(false), 500);
@@ -40,7 +40,7 @@ export default function ProductCard({ product, onProductClick }) {
       <div className="relative h-36 sm:h-48 md:h-64 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         <img
-          src={isLollipop ? '/photo2.png' : (product.image || '/photo1.jpg')}
+          src={isLollipop ? 'photo2.png' : (product.image || 'photo1.jpg')}
           alt={product.name}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
         />
