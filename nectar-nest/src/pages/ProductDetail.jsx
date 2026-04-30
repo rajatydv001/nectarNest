@@ -95,9 +95,12 @@ export default function ProductDetail() {
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-orange-500 rounded-[40%] blur-2xl opacity-20"></div>
             <img
-              src={product.image}
+              src={product.image || '/photo1.jpg'}
               alt={product.name}
               className="relative rounded-[30%] shadow-2xl w-full"
+              onError={(e) => {
+                e.target.src = '/photo1.jpg';
+              }}
             />
           </div>
 
