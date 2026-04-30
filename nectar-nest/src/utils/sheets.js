@@ -8,6 +8,10 @@ export const getProducts = async () => {
   }
   try {
     const response = await fetch(SHEET_DB_URL);
+    if (!response.ok) {
+      console.warn('SheetDB error, using demo products');
+      return getDemoProducts();
+    }
     const data = await response.json();
     if (Array.isArray(data) && data.length > 0) {
       return data;
@@ -294,8 +298,9 @@ function getDemoProducts() {
       name: 'Ginger Honey Lollipop',
       description: 'A unique combination of raw honey and natural ginger. Soothes throat, aids digestion, and provides natural energy. Perfect for all ages.',
       fullDescription: 'Our Ginger Honey Lollipop is crafted with the finest raw honey and fresh ginger extract. This unique fusion not only tastes delicious but also offers numerous health benefits. The warming effect of ginger combined with the soothing properties of honey makes it perfect for sore throat, cough, and cold. It also aids digestion and provides a natural energy boost without any sugar crash.',
-      price_500g: 199,
-      price_1kg: 350,
+      price_500g: 15,
+      price_1kg: 110,
+      price_5units: 50,
       image: honeyImages[10],
       in_stock: true,
       category: 'Wellness',
