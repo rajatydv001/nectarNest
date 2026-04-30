@@ -94,7 +94,6 @@ export default function ProductDetail() {
         <div className="grid lg:grid-cols-2 gap-12">
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-orange-500 rounded-[40%] blur-2xl opacity-20"></div>
-            {console.log('Product image:', product.id, product.image)}
             <img
               src={product.id === 'ginger-lollipop' ? 'photo2.png' : (product.image || 'photo1.jpg')}
               alt={product.name}
