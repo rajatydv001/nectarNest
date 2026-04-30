@@ -5,6 +5,7 @@ export default function ProductCard({ product, onProductClick }) {
   const [isAdding, setIsAdding] = useState(false);
   const { dispatch } = useCart();
 
+  const isLollipop = product.id === 'ginger-lollipop';
   const price500g = product.price_500g;
   const price1kg = product.price_1kg;
 
@@ -16,10 +17,10 @@ export default function ProductCard({ product, onProductClick }) {
       payload: {
         id: product.id,
         name: product.name,
-        size: '500g',
-        price: price500g,
+        size: isLollipop ? '1 unit' : '500g',
+        price: isLollipop ? price500g : price500g,
         quantity: 1,
-        image: product.image
+        image: isLollipop ? '/photo2.png' : (product.image || '/photo1.jpg')
       }
     });
     setTimeout(() => setIsAdding(false), 500);
@@ -39,7 +40,7 @@ export default function ProductCard({ product, onProductClick }) {
       <div className="relative h-36 sm:h-48 md:h-64 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         <img
-          src={product.image}
+          src={isLollipop ? '/photo2.png' : (product.image || '/photo1.jpg')}
           alt={product.name}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
         />
@@ -72,7 +73,7 @@ export default function ProductCard({ product, onProductClick }) {
         <div className="flex items-center justify-between mb-5">
           <div>
             <span className="text-xl font-bold text-amber-600">₹{price500g}</span>
-            <span className="text-xs text-gray-400 ml-1">for 500g</span>
+            <span className="text-xs text-gray-400 ml-1">for {isLollipop ? '1 unit' : '500g'}</span>
           </div>
         </div>
 

@@ -59,7 +59,7 @@ export default function Cart() {
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <img
-                  src={item.image}
+                  src={item.id === 'ginger-lollipop' ? '/photo2.png' : (item.image || '/photo1.jpg')}
                   alt={item.name}
                   className="w-24 h-24 object-cover rounded-xl"
                 />
